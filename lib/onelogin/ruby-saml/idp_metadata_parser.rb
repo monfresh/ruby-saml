@@ -1,5 +1,5 @@
 require "base64"
-require "uuid"
+#require "uuid"
 require "zlib"
 require "cgi"
 require "rexml/document"

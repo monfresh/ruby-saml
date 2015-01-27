@@ -1,4 +1,4 @@
-require "uuid"
+#require "uuid"
 
 require "onelogin/ruby-saml/logging"
 
