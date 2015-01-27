@@ -376,5 +376,17 @@ class RubySamlTest < Test::Unit::TestCase
         assert_equal($evalled, nil)
       end
     end
+
+    context '#expand entities attack' do
+      should 'not allow assertion injection' do
+        malicious_response_document = fixture('response_evil_ref', false)
+        response = OneLogin::RubySaml::Response.new(malicious_response_document)
+        assert response.name_id == "_ce3d2948b4cf20146dee0a0b3dd6f69b6cf86f62d7"
+        assert_equal "test@example.com", response.attributes.single(:mail)
+        assert !response.is_valid?
+        assert response.name_id == "_ce3d2948b4cf20146dee0a0b3dd6f69b6cf86f62d7"
+        assert_equal "test@example.com", response.attributes.single(:mail)
+      end
+    end
   end
 end
